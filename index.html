@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>佐藤壽司店 - 線上點餐系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('69cd01c6_E855913_60f47480.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .info {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-info {
+            padding: 1rem;
+        }
+
+        .menu-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .order-btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .order-btn:hover {
+            background-color: #34495e;
+        }
+
+        .cart {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>佐藤壽司店</h1>
+    </header>
+
+    <div class="banner"></div>
+
+    <div class="info">
+        <p>地址：臺北市11114陽明山華岡路55號</p>
+        <p>電話：23334445</p>
+    </div>
+
+    <div class="menu">
+        <div class="menu-item">
+            <img src="whk109-031.jpg" alt="蕎麥麵">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">蕎麥麵</h3>
+                <p class="menu-item-description">蕎麥麵加上獨特醬汁</p>
+                <p class="menu-item-price">NT$120</p>
+                <button class="order-btn" onclick="addToCart('蕎麥麵', 120)">加入購物車</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="8a695211b38f6965.jpg" alt="豬肉丼飯">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">豬肉丼飯</h3>
+                <p class="menu-item-description">特製豬肉丼飯</p>
+                <p class="menu-item-price">NT$90</p>
+                <button class="order-btn" onclick="addToCart('豬肉丼飯', 90)">加入購物車</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="190331-12260-1-RA11h.jpg" alt="壽司">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">壽司</h3>
+                <p class="menu-item-description">壽司料非常實在</p>
+                <p class="menu-item-price">NT$80</p>
+                <button class="order-btn" onclick="addToCart('壽司', 80)">加入購物車</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="DSC02079.JPG" alt="咖哩飯">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">咖哩飯</h3>
+                <p class="menu-item-description">簡單美味的咖哩飯加上靈魂醬汁</p>
+                <p class="menu-item-price">NT$60</p>
+                <button class="order-btn" onclick="addToCart('咖哩飯', 60)">加入購物車</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="20180522114355_64.jpg" alt="拉麵">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">拉麵</h3>
+                <p class="menu-item-description">特製叉燒加上北海道拉麵</p>
+                <p class="menu-item-price">NT$110</p>
+                <button class="order-btn" onclick="addToCart('拉麵', 110)">加入購物車</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="20140331134354-1148082901.jpg" alt="味增湯">
+            <div class="menu-item-info">
+                <h3 class="menu-item-title">味增湯</h3>
+                <p class="menu-item-description">鮮甜的味增湯</p>
+                <p class="menu-item-price">NT$110</p>
+                <button class="order-btn" onclick="addToCart('味增湯', 110)">加入購物車</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart" id="cart">
+        購物車: NT$0
+    </div>
+
+    <script>
+        let cart = {};
+        let total = 0;
+
+        function addToCart(item, price) {
+            if (cart[item]) {
+                cart[item].quantity += 1;
+            } else {
+                cart[item] = {
+                    price: price,
+                    quantity: 1
+                };
+            }
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartElement = document.getElementById('cart');
+            let cartText = '購物車: NT$' + total;
+            let itemsList = '';
+            
+            for (let item in cart) {
+                itemsList += `\n${item} x${cart[item].quantity}`;
+            }
+            
+            cartElement.textContent = cartText + itemsList;
+        }
+    </script>
+</body>
+</html>
